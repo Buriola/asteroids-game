@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Helper class to use the Scene Managment in any class without having to reimport the SceneManagment Library
+/// Helper class to use the Scene Management in any class without having to reimport the SceneManagment Library
 /// </summary>
 public class SceneLoader : MonoBehaviour
 {

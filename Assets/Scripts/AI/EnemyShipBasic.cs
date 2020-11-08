@@ -27,7 +27,6 @@ namespace Asteroids.AI
         private bool tookDamage;
         private bool canMove;
         private int frames;
-        private bool destroyedByPlayer;
         private float totalTimer = 0;
         private float knockbackDuration = 1f;
 
@@ -39,7 +38,6 @@ namespace Asteroids.AI
             canMove = true;
             tookDamage = false;
             stats.health = stats.maxHealth;
-            destroyedByPlayer = false;
             frames = 0;
             rb = GetComponent<Rigidbody2D>();
             rb.drag = 4;
@@ -145,7 +143,6 @@ namespace Asteroids.AI
         {
             if(stats.health <= 1)
             {
-                destroyedByPlayer = true;
                 st.stats.xp += stats.xpValue;
                 gameObject.SetActive(false);
                 LevelController.instance.playerScore += stats.scoreValue;

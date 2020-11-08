@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEditor.SceneManagement;
 
 namespace EditorUtilities
@@ -26,13 +23,9 @@ namespace EditorUtilities
             OpenScene("Level2");
         }
 
-        static void OpenScene(string name)
+        private static void OpenScene(string name)
         {
-            if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
-            {
-                EditorSceneManager.OpenScene("Assets/Scenes/" + name + ".unity");
-            }
+            if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo()) EditorSceneManager.OpenScene("Assets/Scenes/" + name + ".unity");
         }
-
     }
 }

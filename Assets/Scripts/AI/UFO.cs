@@ -20,8 +20,6 @@ namespace Asteroids.AI
 
         private Rigidbody2D rb;
         private bool tookDamage;
-        private bool canMove;
-        private bool destroyedByPlayer;
         private float totalTimer = 0;
         private float knockbackDuration = 1f;
         #endregion
@@ -29,7 +27,6 @@ namespace Asteroids.AI
         #region Unity Functions
         private void OnEnable()
         {
-            canMove = true;
             tookDamage = false;
             stats.health = stats.maxHealth;
 
@@ -39,7 +36,6 @@ namespace Asteroids.AI
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.gravityScale = 0;
 
-            destroyedByPlayer = false;
             st = GameObject.FindGameObjectWithTag("Player").GetComponent<StateManager>();
         }
 
@@ -52,10 +48,9 @@ namespace Asteroids.AI
             HandleMovement();
         }
 
-        private void OnTriggerEnter2D(Collider2D collider)
+        private void OnTriggerEnter2D(Collider2D otherCollider)
         {
-            //Handles collision with player and apply  damage
-            if (collider.tag == "Player")
+            if (otherCollider.CompareTag("Player"))
             {
                 st.TakeDamage(stats.damage);
                 gameObject.SetActive(false);
@@ -78,7 +73,6 @@ namespace Asteroids.AI
         {
             if (stats.health <= 1)
             {
-                destroyedByPlayer = true;
                 st.stats.xp += stats.xpValue;
                 gameObject.SetActive(false);
                 LevelController.instance.playerScore += stats.scoreValue;
@@ -91,7 +85,6 @@ namespace Asteroids.AI
             {
                 stats.health -= damage;
                 tookDamage = true;
-                canMove = false;
             }
         }
 
@@ -106,7 +99,6 @@ namespace Asteroids.AI
             {
                 totalTimer = 0;
                 tookDamage = false;
-                canMove = true;
             }
 
             //Knockback
